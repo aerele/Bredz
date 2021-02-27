@@ -14,17 +14,18 @@ def get_address(suncode):
 class BredzSalesInvoice(Document):
 	def before_submit(self):
 		new_doc = frappe.new_doc("Sales Invoice")
-		new_doc.customer = self.sun_code #
-		new_doc.invoice_number = self.invoice_no #
-		new_doc.assigned_driver = self.assigned_driver #
+		new_doc.customer = self.sun_code 
+		new_doc.invoice_number = self.invoice_no 
+		new_doc.assigned_driver = self.assigned_driver 
+		new_doc.outlet_name = self.customer_name
+		new_doc.payment_type = self.payment_type
 		new_doc.due_date = self.close_time
 		new_doc.closing_time = self.close_time
 		new_doc.customer_address = self.bc_code
 		new_doc.address_display = self.address
 		new_doc.buisness_date = self.buisness_date
-		# new_doc.item = [{"item_code":'General Item For Reconcillation', "qty":1, "rate":self.value}]
 		row = new_doc.append("items",{})
-		row.item_code = 'General Item For Reconcillation'
+		row.item_code = 'General Item'
 		row.qty = 1
 		row.rate = self.value
 		new_doc.save()

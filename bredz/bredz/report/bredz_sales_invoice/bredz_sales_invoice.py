@@ -69,5 +69,5 @@ def execute(filters=None):
 	return columns, data
 def get_data(from_date, to_date):
 	return frappe.db.sql(f'''SELECT 
-		si.customer_address, si.customer, si.invoice_number, si.assigned_driver, ad.payment_type, ad.address_line1, si.closing_time, si.grand_total
-		FROM `tabSales Invoice` as si JOIN `tabAddress` as ad ON si.customer_address = ad.name''')
+		customer_address, customer, invoice_number, assigned_driver, payment_type, outlet_name, closing_time, grand_total
+		FROM `tabSales Invoice` where closing_time >={from_date} and closing_time <={to_date}''')
