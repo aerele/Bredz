@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2021, Bredz and contributors
+# For license information, please see license.txt
+
+from __future__ import unicode_literals
+import frappe
+from frappe.model.document import Document
+
+@frappe.whitelist()
+def get_address(suncode):
+	return [i[0] for i in frappe.db.get_list("Dynamic Link", {"link_name": suncode}, ['parent'], as_list =1)] 
+
+
+class BredzSalesInvoice(Document):
+	def before_submit(self):
+		new_doc = frappe.new_doc("Sales Invoice")
+		new_doc.customer = self.sun_code #
+		new_doc.invoice_number = self.invoice_no #
+		new_doc.assigned_driver = self.assigned_driver #
+		new_doc.due_date = self.close_time
+		new_doc.closing_time = self.close_time
+		new_doc.customer_address = self.bc_code
+		new_doc.address_display = self.address
+		new_doc.buisness_date = self.buisness_date
+		# new_doc.item = [{"item_code":'General Item For Reconcillation', "qty":1, "rate":self.value}]
+		row = new_doc.append("items",{})
+		row.item_code = 'General Item For Reconcillation'
+		row.qty = 1
+		row.rate = self.value
+		new_doc.save()
+		new_doc.submit()

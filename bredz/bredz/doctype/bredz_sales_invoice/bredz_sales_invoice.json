@@ -1,0 +1,135 @@
+{
+ "autoname": "format:BSI-{sun_code}-{bc_code}-{#####}",
+ "creation": "2021-02-26 15:30:49.318073",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sun_code",
+  "customer_name",
+  "column_break_3",
+  "bc_code",
+  "address",
+  "invoice_details_section",
+  "invoice_no",
+  "assigned_driver",
+  "payment_type",
+  "column_break_10",
+  "close_time",
+  "buisness_date",
+  "value",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "sun_code",
+   "fieldtype": "Link",
+   "label": "Sun Code",
+   "options": "Customer"
+  },
+  {
+   "fetch_from": "bc_code.address_line1",
+   "fieldname": "customer_name",
+   "fieldtype": "Read Only",
+   "label": "Customer Name"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bc_code",
+   "fieldtype": "Link",
+   "label": "BC Code",
+   "options": "Address"
+  },
+  {
+   "fetch_from": "bc_code.city",
+   "fieldname": "address",
+   "fieldtype": "Read Only",
+   "label": "Address"
+  },
+  {
+   "fieldname": "invoice_details_section",
+   "fieldtype": "Section Break",
+   "label": "Invoice Details"
+  },
+  {
+   "fieldname": "invoice_no",
+   "fieldtype": "Data",
+   "label": "Invoice No"
+  },
+  {
+   "fieldname": "assigned_driver",
+   "fieldtype": "Data",
+   "label": "Assigned Driver"
+  },
+  {
+   "fetch_from": "bc_code.payment_type",
+   "fieldname": "payment_type",
+   "fieldtype": "Link",
+   "label": "Payment Type",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "column_break_10",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "close_time",
+   "fieldtype": "Datetime",
+   "label": "Close Time"
+  },
+  {
+   "fieldname": "buisness_date",
+   "fieldtype": "Date",
+   "label": "Buisness Date"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Data",
+   "label": "Value"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Bredz Sales Invoice",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Bredz Sales Invoice",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "is_submittable": 1,
+ "modified": "2021-02-26 15:53:39.916163",
+ "modified_by": "Administrator",
+ "module": "Bredz",
+ "name": "Bredz Sales Invoice",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include bredz *.css
+recursive-include bredz *.csv
+recursive-include bredz *.html
+recursive-include bredz *.ico
+recursive-include bredz *.js
+recursive-include bredz *.json
+recursive-include bredz *.md
+recursive-include bredz *.png
+recursive-include bredz *.py
+recursive-include bredz *.svg
+recursive-include bredz *.txt
+recursive-exclude bredz *.pyc
