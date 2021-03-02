@@ -25,7 +25,8 @@ class BredzSalesInvoice(Document):
 		new_doc.address_display = self.address
 		new_doc.buisness_date = self.buisness_date
 		row = new_doc.append("items",{})
-		row.item_code = 'General Item'
+		row.item_code = 001
+		row.item_name = "General Item"
 		row.qty = 1
 		row.rate = self.value
 		new_doc.save()
