@@ -50,18 +50,24 @@ def execute(filters=None):
 			"label": "Buisness Date",
 			"width": 0
 		},
-		# {
-		# 	"fieldname": "status",
-		# 	"fieldtype": "Data",
-		# 	"label": "Status",
-		# 	"width": 0
-		# },
+		{
+			"fieldname": "status",
+			"fieldtype": "Data",
+			"label": "Status",
+			"width": 0
+		},
 		{
 			"fieldname": "value",
 			"fieldtype": "Data",
 			"label": "Value",
 			"width": 0
-		}
+		},
+		{
+			"fieldname": "outstanding_amount",
+			"fieldtype": "Data",
+			"label": "Outstanding Amount",
+			"width": 0
+		},
 	]
 	data = ''
 	if filters.from_date and filters.to_date:
@@ -69,5 +75,5 @@ def execute(filters=None):
 	return columns, data
 def get_data(from_date, to_date):
 	return frappe.db.sql(f'''SELECT 
-		customer_address, customer, invoice_number, assigned_driver, payment_type, outlet_name, closing_time, grand_total
+		customer_address, customer, invoice_number, assigned_driver, payment_type, outlet_name, closing_time, status, rounded_total, outstanding_amount
 		FROM `tabSales Invoice` where closing_time >={from_date} and closing_time <={to_date}''')
