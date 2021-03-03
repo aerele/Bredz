@@ -62,8 +62,9 @@
   },
   {
    "fieldname": "assigned_driver",
-   "fieldtype": "Data",
-   "label": "Assigned Driver"
+   "fieldtype": "Link",
+   "label": "Assigned Driver",
+   "options": "Employee"
   },
   {
    "fetch_from": "bc_code.payment_type",
@@ -111,7 +112,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2021-03-03 14:44:48.622302",
+ "modified": "2021-03-03 16:36:28.282673",
  "modified_by": "Administrator",
  "module": "Bredz",
  "name": "Bredz Sales Invoice",
