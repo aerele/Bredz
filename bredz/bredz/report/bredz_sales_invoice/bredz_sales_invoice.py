@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
+from datetime import datetime
 import frappe
 
 def execute(filters=None):
@@ -74,6 +75,7 @@ def execute(filters=None):
 		data = get_data(filters.from_date, filters.to_date)
 	return columns, data
 def get_data(from_date, to_date):
-	return frappe.db.sql(f'''SELECT 
-		customer_address, customer, invoice_number, assigned_driver, payment_type, outlet_name, closing_time, status, rounded_total, outstanding_amount
-		FROM `tabSales Invoice` where closing_time >={from_date} and closing_time <={to_date}''')
+	from_date = datetime.strptime(from_date, "%Y-%m-%d")
+	to_date = datetime.strptime(to_date, "%Y-%m-%d")
+	print(from_date, to_date)
+	return frappe.db.sql(f'''SELECT customer_address, customer, invoice_number, assigned_driver, payment_type,outlet_name, closing_time, status, rounded_total, outstanding_amount FROM `tabSales Invoice` where closing_time >=\'{from_date}\' and closing_time <=\'{to_date}\'''')
