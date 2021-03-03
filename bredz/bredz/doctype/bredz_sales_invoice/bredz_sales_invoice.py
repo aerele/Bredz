@@ -5,6 +5,7 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
+from datetime import datetime
 
 @frappe.whitelist()
 def get_address(suncode):
@@ -19,11 +20,13 @@ class BredzSalesInvoice(Document):
 		new_doc.assigned_driver = self.assigned_driver 
 		new_doc.outlet_name = self.customer_name
 		new_doc.payment_type = self.payment_type
-		new_doc.due_date = self.close_time
-		new_doc.closing_time = self.close_time
+		new_doc.closing_time = datetime.strptime(self.close_time, "%m/%d/%Y %I:%M:%S %p")
 		new_doc.customer_address = self.bc_code
 		new_doc.address_display = self.address
-		new_doc.buisness_date = self.buisness_date
+		try:
+			datetime.strptime(self.buisness_date,  '%d-%b-%y').date()
+		except :
+			new_doc.buisness_date = self.buisness_date
 		row = new_doc.append("items",{})
 		row.item_code = '001'
 		row.item_name = "General Item"
@@ -31,3 +34,6 @@ class BredzSalesInvoice(Document):
 		row.rate = self.value
 		new_doc.save()
 		new_doc.submit()
+
+	def on_trash(self):
+		frappe.db.delete("Sales Invoice", {'invoice_number':self.invoice_no})

@@ -57,7 +57,8 @@
   {
    "fieldname": "invoice_no",
    "fieldtype": "Data",
-   "label": "Invoice No"
+   "label": "Invoice No",
+   "unique": 1
   },
   {
    "fieldname": "assigned_driver",
@@ -77,12 +78,12 @@
   },
   {
    "fieldname": "close_time",
-   "fieldtype": "Datetime",
+   "fieldtype": "Data",
    "label": "Close Time"
   },
   {
    "fieldname": "buisness_date",
-   "fieldtype": "Date",
+   "fieldtype": "Data",
    "label": "Buisness Date"
   },
   {
@@ -110,7 +111,7 @@
   }
  ],
  "is_submittable": 1,
- "modified": "2021-02-26 15:53:39.916163",
+ "modified": "2021-03-03 14:44:48.622302",
  "modified_by": "Administrator",
  "module": "Bredz",
  "name": "Bredz Sales Invoice",
