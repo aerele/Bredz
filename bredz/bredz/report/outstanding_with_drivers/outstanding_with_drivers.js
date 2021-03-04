@@ -5,6 +5,13 @@
 frappe.query_reports["Outstanding with drivers"] = {
 	"filters": [
 		{
+			"fieldname": "driver_name",
+			"fieldtype": "Link",
+			"options": "Driver",
+			"label": "Driver Name",
+			"mandatory": 1
+		},
+		{
 			"fieldname": "from_date",
 			"fieldtype": "Date",
 			"label": "From Date",
