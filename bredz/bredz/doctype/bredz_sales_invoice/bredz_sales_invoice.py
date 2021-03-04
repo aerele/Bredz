@@ -17,6 +17,11 @@ class BredzSalesInvoice(Document):
 		new_doc = frappe.new_doc("Sales Invoice")
 		new_doc.customer = self.sun_code 
 		new_doc.invoice_number = self.invoice_no 
+		if not frappe.db.exists("Driver", self.assigned_driver):
+			new_driver = frappe.new_doc("Driver")
+			new_driver.full_name = self.assigned_driver
+			new_driver.save()
+		
 		new_doc.assigned_driver = self.assigned_driver 
 		new_doc.outlet_name = self.customer_name
 		new_doc.payment_type = self.payment_type
@@ -28,7 +33,7 @@ class BredzSalesInvoice(Document):
 		except :
 			new_doc.buisness_date = self.buisness_date
 		row = new_doc.append("items",{})
-		row.item_code = '001'
+		row.item_code = 'General Item'
 		row.item_name = "General Item"
 		row.qty = 1
 		row.rate = self.value
