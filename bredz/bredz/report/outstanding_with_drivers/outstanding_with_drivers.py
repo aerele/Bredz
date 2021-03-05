@@ -21,7 +21,8 @@ def execute(filters=None):
 		},
 		{
 			"fieldname": "outstanding_amount",
-			"fieldtype": "Data",
+			"fieldtype": "Currency",
+			"precision": 2,
 			"label": "Outstanding Amount",
 			"width": 0
 		},
