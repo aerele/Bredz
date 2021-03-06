@@ -41,4 +41,7 @@ class BredzSalesInvoice(Document):
 		new_doc.submit()
 
 	def on_trash(self):
+		name = frappe.db.get_value("Sales Invoice", {'invoice_number':self.invoice_no}, ['name'])
 		frappe.db.delete("Sales Invoice", {'invoice_number':self.invoice_no})
+		for i in frappe.db.get_list("GL Entry", {'voucher_no': name}, ['name']):
+			frappe.db.delete("GL Entry", i.name)
