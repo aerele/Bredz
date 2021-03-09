@@ -34,14 +34,18 @@ def execute(filters=None):
 		}
 	]
 	data = ''
+	print(filters)
 	if (filters.from_date and filters.to_date) or (filters.from_date and filters.to_date and filters.driver_name):
 		data = get_data(filters.from_date, filters.to_date, filters.driver_name)
+	print(data)
 	return columns, data
 
 def get_data(from_date, to_date, driver):
 	from_date = datetime.strptime(from_date, "%Y-%m-%d")
 	to_date = datetime.strptime(to_date, "%Y-%m-%d")
 	if driver:
-		return frappe.db.sql(f'''SELECT outlet_name, invoice_number, outstanding_amount, assigned_driver FROM `tabSales Invoice` where payment_type = \'CASH\' AND closing_time >=\'{from_date}\' AND closing_time <=\'{to_date}\' AND assigned_driver = \'{driver}\' AND status = \'Unpaid\'''')
+		print(from_date, to_date, driver)
+		return frappe.db.sql("""SELECT outlet_name, invoice_number, outstanding_amount, assigned_driver FROM `tabSales Invoice` where payment_type = "CASH" AND closing_time >= %s AND closing_time <= %s AND assigned_driver = %s AND status = "Unpaid" """,(from_date, to_date, driver))
 	else:
-		return frappe.db.sql(f'''SELECT outlet_name, invoice_number, outstanding_amount, assigned_driver FROM `tabSales Invoice` where payment_type = \'CASH\' AND closing_time >=\'{from_date}\' AND closing_time <=\'{to_date}\' AND status = \'Unpaid\'''')
+		print(from_date, to_date)
+		return 	frappe.db.sql("""SELECT outlet_name, invoice_number, outstanding_amount, assigned_driver FROM `tabSales Invoice` where payment_type = "CASH" AND closing_time >= %s AND closing_time <= %s AND status = "Unpaid" """,(from_date, to_date))
